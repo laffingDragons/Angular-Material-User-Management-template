@@ -1,0 +1,135 @@
+<div class="background">
+    <side-bar></side-bar>
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col align-self-center">
+        <div class="container">
+
+          <h1 class="text-center" style="margin-top:5%"> SignUp</h1>
+          <br>
+
+          <mat-accordion class="example-headers-align">
+              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    First name
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      {{firstName}}
+                    </mat-panel-description>
+                  
+                </mat-expansion-panel-header>
+            
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="First name" type="text" [(ngModel)]="firstName" autofocus>
+                </mat-form-field>
+            
+                <mat-action-row>
+                  <button mat-button color="primary" (click)="nextStep()">Next</button>
+                </mat-action-row>
+              </mat-expansion-panel>
+            
+              <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Last name
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      {{lastName}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+            
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Last name" type="text" [(ngModel)]="lastName" autofocus>
+                  </mat-form-field>
+            
+                <mat-action-row>
+                  <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                  <button mat-button color="primary" (click)="nextStep()">Next</button>
+                </mat-action-row>
+              </mat-expansion-panel>
+            
+              <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      Mobile number
+                  </mat-panel-title>
+                  <mat-panel-description>
+                      {{mobileNumber}}
+                    </mat-panel-description>
+                  
+                </mat-expansion-panel-header>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Mobile number" type="number" [(ngModel)]="mobileNumber" autofocus>
+                  </mat-form-field>
+               
+            
+                <mat-action-row>
+                  <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                  <button mat-button color="primary" (click)="nextStep()">Next</button>
+                </mat-action-row>
+              </mat-expansion-panel>
+
+              <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Email 
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{email}}
+                      </mat-panel-description>
+                    
+                  </mat-expansion-panel-header>
+                  <mat-form-field class="example-full-width">
+                      <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" [(ngModel)]="email" autofocus>
+                      <mat-hint>Errors appear instantly!</mat-hint>
+                      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Please enter a valid email address
+                      </mat-error>
+                      <mat-error *ngIf="emailFormControl.hasError('required')">
+                        Email is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                 
+              
+                  <mat-action-row>
+                    <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                    <button mat-button color="primary" (click)="nextStep()">Next</button>
+                  </mat-action-row>
+                </mat-expansion-panel>
+
+                <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                          Password
+                      </mat-panel-title>
+                      
+                    </mat-expansion-panel-header>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Password" type="password" [(ngModel)]="password" autofocus>
+                      </mat-form-field>
+                   
+                
+                    <mat-action-row>
+                      <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                      <button mat-button color="primary" (click)="submit()">SignUp</button>
+                    </mat-action-row>
+                  </mat-expansion-panel>
+            
+            </mat-accordion>
+
+            <br>
+
+          <h6>Already have account? <a [routerLink]="['/sign-in']">SignIn</a> </h6>
+          <h6>Forgot password.</h6>
+          <br>
+          <!-- <button mat-raised-button class="singinbtn mat-elevation-z8" color='primary' (click)="submit()"><i class="material-icons">navigate_next</i></button> -->
+          <!-- <br><br> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

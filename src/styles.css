@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body{
+    color: rgba(0,0,0,.54);
+    height: 100%;
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+  outline: none;
+}
+
+a{
+    color:#3f51b5;
+}
+
+
+.mat-card-green {
+    background: #acd8c9d6;
+    color: rgba(0,0,0,.54);
+}
+
+.mat-card-pink {
+    background:#E1C3EE;
+    color: rgba(0,0,0,.54);
+}
+
+.mat-card-blue {
+    background: #C6D9EE;
+    color: rgba(0,0,0,.54);
+}
+
+.mat-card-lemon {
+    background: #E3F9C0;
+    color: rgba(0,0,0,.54);
+}
+
+.mat-card-magenta {
+    background: #ED96B1;
+    color: rgba(0,0,0,.54);
+}

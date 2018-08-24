@@ -1,0 +1,17 @@
+.example-card {
+    max-width: 42.5%;
+    margin: 3%
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .head{
+      margin: 5% 0px;
+  }
+
+  .graph-card{
+      width: 100%
+  }

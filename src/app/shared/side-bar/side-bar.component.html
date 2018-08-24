@@ -1,0 +1,77 @@
+<div class="nav-bar d-xs-inline d-sm-inline d-md-none">
+    <i class="material-icons nav-menu">menu</i>
+
+    <ul class="side-bar-list" style="padding-top:51px">
+      <li [routerLink]="['/home']">
+        <i class="material-icons">
+          home
+        </i>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp; Home</p>
+  
+      </li>
+      <hr>
+      
+      <li [routerLink]="['/sign-in']">
+        <i class="material-icons">
+          sentiment_satisfied_alt
+        </i>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp; Sign-In</p>
+      </li>
+      <hr>
+      <li [routerLink]="['/sign-up']" >
+        <i class="material-icons">
+          pets
+        </i>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp; Sign-Up</p>
+  
+      </li>
+      <hr>
+      <li [routerLink]="['/sign-up']" >
+        <i class="material-icons">
+            timer
+            </i>
+       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{hour}}:{{minute}}:{{second}}  </p> 
+  
+      </li>
+    </ul>
+</div>
+
+<div class="side-bar d-none d-md-block">
+
+  <i class="material-icons menu">menu</i>
+
+  <ul class="side-bar-list">
+    <li [routerLink]="['/home']">
+      <i class="material-icons">
+        home
+      </i>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp; Home</p>
+
+    </li>
+    
+    <hr>
+    <li [routerLink]="['/sign-in']">
+      <i class="material-icons">
+        sentiment_satisfied_alt
+      </i>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp; Sign-In</p>
+    </li>
+      <hr>
+
+    <li [routerLink]="['/sign-up']" >
+      <i class="material-icons">
+        pets
+      </i>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp; Sign-Up</p>
+
+    </li>
+    <hr>
+    <li [routerLink]="['/sign-up']" >
+      <i class="material-icons">
+          timer
+          </i>
+     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{hour}}:{{minute}}:{{second}}  </p> 
+
+    </li>
+  </ul>
+</div>

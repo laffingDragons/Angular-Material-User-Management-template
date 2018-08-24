@@ -1,0 +1,40 @@
+<div class="background">
+    <side-bar></side-bar>
+
+  <div class="container">
+    <div class="row">
+
+      <!-- Signin Input -->
+      <div class="col align-self-center">
+        <div class="container">
+
+          <h1 class="text-center" style="margin-top:10%"> Welcome</h1>
+          <br>
+          <h6>Please Signin to continue.</h6>
+          <br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" [(ngModel)]="email">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <br><br>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" type="password" [(ngModel)]="password">
+          </mat-form-field>
+          <br>
+          <h6>Don't have account yet? <a [routerLink]="['/sign-up']">SignUp</a> </h6>
+          <h6>Forgot password.</h6>
+          <br>
+          <button mat-raised-button class="singinbtn mat-elevation-z8" color='primary' (click)="submit()"><i class="material-icons">navigate_next</i></button>
+          <br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
