@@ -40,6 +40,8 @@
 /** IE10 and IE11 requires the following for the Reflect API. */
 // import 'core-js/es6/reflect';
 
+// Add global to window, assigning the value of window itself.
+(window as any).global = window;
 
 /** Evergreen browsers require these. **/
 // Used for reflect-metadata in JIT. If you use AOT (and only Angular decorators), you can remove.

@@ -7,11 +7,39 @@
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
   }
-
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .add-btn{
+      margin:3px;
+      margin-top: 30px;
+  }
   .head{
       margin: 5% 0px;
   }
 
   .graph-card{
       width: 100%
+  }
+  .card{
+      width: 100%;
+  }
+  .add-task{
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      margin: 30px;
+  }
+
+  .mat-card-primary{
+    background-color: #3f51b5;
+  }
+  .task-card{
+      width: 100%;
   }

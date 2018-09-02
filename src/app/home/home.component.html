@@ -1,86 +1,144 @@
 <div class="container-fluid">
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background: #acd8c9d6">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Create task</h4>
+                    <mat-slide-toggle color="primary" checked="checked" [(ngModel)]="private">
+                        Private
+                    </mat-slide-toggle>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <mat-form-field>
+                        <input matInput placeholder="Title" type="text" [(ngModel)]="title">
+                    </mat-form-field>
+                    <button mat-raised-button class="mat-elevation-z8 add-btn float-right" color='primary' (click)='addTask()'><i
+                            class="material-icons">
+                            done_outline
+                        </i></button>
+                    <hr>
+                    <div *ngFor='let x of taskNumberIds; let i = index'>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Task{{i+1}}" type="text" [(ngModel)]="this['subtask' + x]">
+                        </mat-form-field>
+                    </div>
+                    <div class='float-right'>
+
+                        <button *ngIf='count != 10' mat-mini-fab class="mat-elevation-z8 add-btn" color='primary' (click)='add()'> <i
+                                class="material-icons">
+                                add
+                            </i></button>
+                        <!-- <button *ngIf='count != 1' mat-mini-fab class="mat-elevation-z8 add-btn" color='warn' (click)='remove()'> <i
+                                class="material-icons">
+                                close
+                            </i></button> -->
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button *ngIf='!spinner  && !taskCreationUpdate' mat-raised-button class="mat-elevation-z8" color='primary' data-dismiss="modal">
+                        <i class="material-icons">
+                            close
+                        </i></button>
+                    <mat-spinner *ngIf='spinner' [diameter]="40"></mat-spinner>
+                    <a *ngIf='!spinner && taskCreationUpdate'>Task Created Successfully!!!</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end of modal -->
+
+
     <div class="row">
         <side-bar></side-bar>
-        <mat-progress-bar mode="indeterminate" value="40"></mat-progress-bar>
+        <mat-progress-bar mode="indeterminate" value="40" *ngIf="!users && !userInfo"></mat-progress-bar>
 
         <div class="container">
             <div class="row">
-                <h2 class="mx-auto head">Home</h2>
+                <h2 class="mx-auto head">ToDo</h2>
             </div>
             <br>
-            <div class="row">
-                
-                <mat-card class="graph-card mat-card-pink">
-                        <canvas id="canvas">{{ chart }}</canvas>
-                </mat-card>
+            <div *ngIf="users && userInfo" class="row">
 
-                <mat-card class="example-card mat-card-magenta">
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Shiba Inu</mat-card-title>
-                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                        <p>
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-                            very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                        </p>
-                    </mat-card-content>
+                <div *ngFor="let user of users">
+                    <div *ngIf="userId !== user.userId ">
+                        <mat-card class="card mat-card-green ">
 
-                </mat-card>
+                            <p>{{user.firstName}}</p>
+                            <button *ngIf="!userInfo.request.includes(user.userId) && !userInfo.friends.includes(user.userId) && !userInfo.requested.includes(user.userId)"
+                                mat-raised-button class="mat-elevation-z8" color='primary' (click)="addAsFriend(user.userId, user.firstName)"><i
+                                    class="material-icons">
+                                    person_add
+                                </i></button>
 
-                <mat-card class="example-card mat-card-lemon">
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Shiba Inu</mat-card-title>
-                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                        <p>
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-                            very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                        </p>
-                    </mat-card-content>
+                            <button *ngIf="userInfo.requested.includes(user.userId)" mat-raised-button class="mat-elevation-z8" color='disabled' disabled>Pending...</button>
 
-                </mat-card>
+                            <button *ngIf="userInfo.request.includes(user.userId)" mat-raised-button class="mat-elevation-z8" color='primary' (click)="addToFriend(user.userId, user.firstName)"><i
+                                    class="material-icons">
+                                    check
+                                </i></button>
 
-                <mat-card class="example-card mat-card-blue">
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Shiba Inu</mat-card-title>
-                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                        <p>
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-                            very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                        </p>
-                    </mat-card-content>
+                            <button *ngIf="userInfo.friends.includes(user.userId)" mat-raised-button class="mat-elevation-z8" color='primary'><i
+                                    class="material-icons">
+                                    account_circle
+                                </i></button>
+                        </mat-card>
+                    </div>
 
-                </mat-card>
-
-                <mat-card class="example-card mat-card-green">
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Shiba Inu</mat-card-title>
-                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                        <p>
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes
-                            very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                        </p>
-                    </mat-card-content>
-
-                </mat-card>
-
+                </div>
             </div>
+            <br><br>
+            <hr><br>
+            <!-- Tasks -->
+            <div class="row">
+                <mat-spinner *ngIf='!tasks' [diameter]="100" class="mx-auto"></mat-spinner>
+
+
+                <div *ngFor='let task of tasks; let i = index' class="col-md-6">
+
+                    <mat-card *ngIf="task.type === 'public'" class="card mat-card-green task-card">
+                        <h4>{{ task.title }}</h4>
+                        <button mat-icon-button color="primary" *ngIf="userInfo.friends.includes(task.createdByUserId)" (click)='editTask(task)'>
+                            <i class="material-icons">
+                                edit
+                            </i>
+                        </button>
+                    </mat-card>
+
+
+                    <mat-card *ngIf="task.type === 'private'" class="card mat-card-primary ">
+                        <h4>{{ task.title }}</h4>
+                        <button mat-icon-button color="link" (click)='editTask(task)'>
+                                <i class="material-icons">
+                                    edit
+                                </i>
+                            </button>
+                    </mat-card>
+
+                </div>
+            </div>
+            <!-- end of task row -->
         </div>
 
 
     </div>
+    <button mat-fab class="mat-elevation-z8 add-task d-none d-md-block" color='primary' data-toggle="modal" data-target="#myModal">
+        <i class="material-icons">
+            add
+        </i></button>
+    <button mat-mini-fab class="mat-elevation-z8 add-task d-xs-inline d-sm-inline d-md-none" color='primary' data-toggle="modal"
+        data-target="#myModal"><i class="material-icons">
+            add
+        </i></button>
+
 </div>

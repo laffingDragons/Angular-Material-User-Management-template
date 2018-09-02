@@ -93,3 +93,9 @@
 .nav-bar:hover p{
     display: inline;
 }
+
+.logout{
+    cursor: pointer;
+    height:24px;
+    width: 24px;
+}

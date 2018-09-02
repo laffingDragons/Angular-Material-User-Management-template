@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { AppService } from './../../app.service';
 import { MatSnackBar } from '@angular/material';
+
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -24,15 +27,17 @@ export class SigninComponent implements OnInit {
 
   public email: string;
   public password: string;
+  public progress: boolean = false;
 
 
 
-  constructor(public snackBar: MatSnackBar, public router: Router, public _route: ActivatedRoute, ) { }
+  constructor(public appService: AppService, public snackBar: MatSnackBar, public router: Router, public _route: ActivatedRoute, ) { }
 
   ngOnInit() {
+
   }
 
-
+ 
   //Validations
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -49,12 +54,51 @@ export class SigninComponent implements OnInit {
 
   submit() {
 
+    this.progress = true;
 
     if (this.email) {
 
       if (this.password.length >= 8) {
 
-        this.router.navigate(['/sign-up']);
+        let data = {
+          email: this.email,
+          password: this.password
+        }
+  
+        this.appService.signinFunction(data)
+          .subscribe((apiResponse) => {
+  
+            if (apiResponse.status === 200) {
+  
+  
+              Cookie.set('authtoken', apiResponse.data.authToken);
+            
+  
+              this.appService.setUserInfoInLocalStorage(apiResponse.data.userDetails);
+  
+              this.router.navigate(['/home']);
+  
+            } else if (apiResponse.status === 404) {
+              this.progress = false;
+              this.snackBar.open(`Email or Password wrong`, "Dismiss", {
+                duration: 5000,
+              });
+  
+            } else {
+  
+              this.snackBar.open(`${apiResponse.message}`, "Dismiss", {
+                duration: 5000,
+              });
+  
+            }
+  
+          }, (err) => {
+  
+            this.snackBar.open(`some error occured`, "Dismiss", {
+              duration: 5000,
+            });
+  
+          });
 
       } else {
 

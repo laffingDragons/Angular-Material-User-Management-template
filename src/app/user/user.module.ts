@@ -8,6 +8,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SharedModule } from "./../shared/shared.module";
 
 import {MatInputModule, MatButtonModule, MatFormFieldModule, MatSnackBarModule, MatProgressBarModule,  MatExpansionModule} from '@angular/material';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   imports: [
@@ -24,9 +26,11 @@ import {MatInputModule, MatButtonModule, MatFormFieldModule, MatSnackBarModule, 
     SharedModule,
     RouterModule.forChild([
       {path: 'sign-up', component: SignupComponent },
+      {path: 'forgot-password', component: ForgotPasswordComponent },
+      {path:'change-password/:userId', component: ChangePasswordComponent }
     ])
 
   ],
-  declarations: [SigninComponent, SignupComponent]
+  declarations: [SigninComponent, SignupComponent, ForgotPasswordComponent, ChangePasswordComponent]
 })
 export class UserModule { }

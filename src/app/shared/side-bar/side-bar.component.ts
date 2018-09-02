@@ -2,7 +2,10 @@ import { Component, OnChanges, Input, EventEmitter, Output, OnInit } from '@angu
 import { Router, ActivatedRoute } from '@angular/router';
 import { interval } from 'rxjs';
 import { map } from 'rxjs/operators'
-
+import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { AppService } from './../../app.service';
+import { MatSnackBar } from '@angular/material';
+import { SocketService } from './../../socket.service'
 
 @Component({
   selector: 'side-bar',
@@ -18,7 +21,7 @@ export class SideBarComponent implements OnInit {
   public minute :number=0;
   public hour :number=0;
 
-  constructor(public router: Router, public _route: ActivatedRoute, ) { }
+  constructor(public socketService:SocketService, public appService: AppService, public snackBar: MatSnackBar, public router: Router, public _route: ActivatedRoute, ) { }
 
   ngOnInit() {
 
@@ -46,5 +49,38 @@ export class SideBarComponent implements OnInit {
     this.second = seconds;
 
   }
+
+
+  public logout: any = () => {
+    
+    let userId = this.appService.getUserInfoFromLocalstorage().userId
+
+    this.appService.logout(userId)
+      .subscribe((apiResponse) => {
+
+        if (apiResponse.status === 200) {
+
+          Cookie.delete('authtoken');
+
+          this.socketService.exitSocket();
+
+          this.router.navigate(['/sign-in']);
+
+        } else {
+          this.snackBar.open(`${apiResponse.message}`, "Dismiss", {
+            duration: 5000,
+          });
+
+        } // end condition
+
+      }, (err) => {
+        this.snackBar.open(`some error occured`, "Dismiss", {
+          duration: 5000,
+        });
+
+
+      });
+
+  } // end logout
 
 }

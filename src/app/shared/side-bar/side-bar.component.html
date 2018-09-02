@@ -1,6 +1,5 @@
 <div class="nav-bar d-xs-inline d-sm-inline d-md-none">
     <i class="material-icons nav-menu">menu</i>
-
     <ul class="side-bar-list" style="padding-top:51px">
       <li [routerLink]="['/home']">
         <i class="material-icons">
@@ -31,6 +30,12 @@
             timer
             </i>
        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{hour}}:{{minute}}:{{second}}  </p> 
+       
+      </li>
+      <hr>
+      <li (click)="logout()" >
+        <img class="logout" src="./../../../assets/logout.png" alt="Logout" >
+        <p>&nbsp;&nbsp;&nbsp;&nbsp; Logout</p>
   
       </li>
     </ul>
@@ -71,6 +76,12 @@
           timer
           </i>
      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{hour}}:{{minute}}:{{second}}  </p> 
+
+    </li>
+    <hr>
+    <li (click)="logout()" >
+      <img class="logout" src="./../../../assets/logout.png" alt="Logout" >
+      <p>&nbsp;&nbsp;&nbsp;&nbsp; Logout</p>
 
     </li>
   </ul>

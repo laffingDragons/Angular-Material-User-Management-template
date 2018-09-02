@@ -14,7 +14,7 @@
           <br>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" [(ngModel)]="email">
-            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-hint>Email seems to be Ok!</mat-hint>
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
               Please enter a valid email address
             </mat-error>
@@ -28,7 +28,7 @@
           </mat-form-field>
           <br>
           <h6>Don't have account yet? <a [routerLink]="['/sign-up']">SignUp</a> </h6>
-          <h6>Forgot password.</h6>
+          <h6 style="cursor:pointer" [routerLink]="['/forgot-password']">Forgot password.</h6>
           <br>
           <button mat-raised-button class="singinbtn mat-elevation-z8" color='primary' (click)="submit()"><i class="material-icons">navigate_next</i></button>
           <br><br>

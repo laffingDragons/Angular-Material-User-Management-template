@@ -2,6 +2,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body{
+    
+background-repeat: no-repeat;
     color: rgba(0,0,0,.54);
     height: 100%;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -12,6 +14,7 @@ body{
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
   outline: none;
+  
 }
 
 a{
